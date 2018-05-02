@@ -64,7 +64,13 @@ class UsersTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->scalar('name')
+            ->scalar('name')            
+            ->add('name', [
+                'length' => [
+                    'rule' => ['minLength', 5],
+                    'message' => 'Nome deverá ter pelo menos 5 caracteres',
+                ]
+            ])
             ->maxLength('name', 255)
             ->requirePresence('name', 'create')
             ->notEmpty('name');
@@ -84,7 +90,7 @@ class UsersTable extends Table
             ->scalar('password')
             ->maxLength('password', 255)
             ->requirePresence('password', 'create')
-            ->notEmpty('password');
+            ->allowEmpty('password', 'update');
 
         $validator
             ->email('email')

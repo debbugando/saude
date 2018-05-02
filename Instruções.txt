@@ -1,0 +1,14 @@
+Arquivo com o passo à passo para integração da ferramenta.
+
+1 - Abrir o arquivo "saude_bd" e efetuar a inserção dessas instruções
+no banco de dados (MySql).
+2 - Não será necessário configurar os dados de acesso ao banco de dados.
+3 - Ao executar a rotina de inserção do passo 1, teremos 2 usuários:
+
+Usuário Médico
+Login: medico@email.com
+Senha: medico
+
+Usuário Enfermeiro
+Login: enfermeiro@email.com
+Senha: enfermeiro

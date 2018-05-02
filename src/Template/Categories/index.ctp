@@ -14,10 +14,34 @@
     </div>
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
     <thead>
-        <tr>
-            <th scope="col"><?= $this->Paginator->sort('name','Nome') ?></th>
-            <th scope="col"><?= $this->Paginator->sort('created','Criado em') ?></th>
-            <th scope="col"><?= $this->Paginator->sort('modified', 'Modificado em') ?></th>
+        <tr>            
+            <th scope="col">
+            <?=$this->Paginator->sort(
+                'name',
+                array('asc' => __('Nome') . ' <i class="fa fa-angle-down"></i>',
+                    'desc' => __('Nome') . ' <i class="fa fa-angle-up"></i>'
+                ),
+                array( 'escape' => false )
+            );?>   
+            </th>
+            <th scope="col">
+            <?=$this->Paginator->sort(
+                'created',
+                array('asc' => __('Criado em') . ' <i class="fa fa-angle-down"></i>',
+                    'desc' => __('Criado em') . ' <i class="fa fa-angle-up"></i>'
+                ),
+                array( 'escape' => false )
+            );?>   
+            </th>
+            <th scope="col">
+            <?=$this->Paginator->sort(
+                'modified',
+                array('asc' => __('Modificado em') . ' <i class="fa fa-angle-down"></i>',
+                    'desc' => __('Modificado em') . ' <i class="fa fa-angle-up"></i>'
+                ),
+                array( 'escape' => false )
+            );?>   
+            </th>
             <th scope="col" class="actions"><?= __('Ações') ?></th>
         </tr>
     </thead>

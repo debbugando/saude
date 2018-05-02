@@ -165,7 +165,12 @@ class UploadsTable extends Table
 
         $validator
             ->scalar('filename')
-            ->minLength('filename', 5)
+            ->add('name', [
+                'length' => [
+                    'rule' => ['minLength', 5],
+                    'message' => 'Nome deverá ter pelo menos 5 caracteres',
+                ]
+            ])
             ->maxLength('filename', 255)
             ->requirePresence('filename', 'create')
             ->notEmpty('filename');
@@ -176,13 +181,16 @@ class UploadsTable extends Table
             ->add('file','file', [
                 'rule' => ['mimeType', [
                         'application/vnd.openxmlformats-officedocument.wordprocessingml.document',//DOCX
-                        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',//XLSX
+                        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',//XLSX,
+                        'application/vnd.ms-powerpoint',//PPT
+                        'application/vnd.openxmlformats-officedocument.presentationml.presentation', //PPTX
                         'application/msword',//WORD
-                        'application/excel', //XLS
+                        'application/excel', //XLSX
+                        'application/vnd.ms-excel', //XLS
                         'application/pdf', //PDF
                     ] 
                 ],
-                'message' => __('Arquivo Inválido. Somente esses Arquivos são Permitidos: PDF,DOC,XLSX e PPT')            
+                'message' => __('Arquivo Inválido. Somente esses Arquivos são Permitidos: PDF,DOC,XLSX e PPT')
         ]);
 
         $validator
@@ -195,7 +203,7 @@ class UploadsTable extends Table
                         'image/bmp'
                     ] 
                 ],
-                'message' => __('Arquivo Inválido. Somente esses Arquivos são Permitidos: PDF,DOC,XLSX e PPT')            
+                'message' => __('Arquivo Inválido. Somente esses Arquivos são Permitidos: PDF,DOC,XLSX e PPT')
         ]);
 
         return $validator;

@@ -14,36 +14,60 @@
     </div>
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
-            <tr>                
-                <th scope="col"><?= $this->Paginator->sort('user_id', 'Usuário') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('photo', 'Arquivo') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('thumbnail', 'Miniatura') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('category_id', 'Categoria') ?></th>
+            <tr>                                
                 <th scope="col">
-                <?= 
-                $this->Paginator->sort(
+                <?=$this->Paginator->sort(
+                    'user_id',
+                    array('asc' => __('Usuário') . ' <i class="fa fa-angle-down"></i>',
+                        'desc' => __('Usuário') . ' <i class="fa fa-angle-up"></i>'
+                    ),
+                    array( 'escape' => false )
+                );?>   
+                </th>               
+                <th scope="col">
+                <?=$this->Paginator->sort(
+                    'photo',
+                    array('asc' => __('Arquivo') . ' <i class="fa fa-angle-down"></i>',
+                        'desc' => __('Arquivo') . ' <i class="fa fa-angle-up"></i>'
+                    ),
+                    array( 'escape' => false )
+                );?>   
+                </th>                
+                <th scope="col">
+                <?=$this->Paginator->sort(
+                    'thumbnail',
+                    array('asc' => __('Miniatura') . ' <i class="fa fa-angle-down"></i>',
+                        'desc' => __('Miniatura') . ' <i class="fa fa-angle-up"></i>'
+                    ),
+                    array( 'escape' => false )
+                );?>   
+                </th>                
+                <th scope="col">
+                <?=$this->Paginator->sort(
+                    'category_id',
+                    array('asc' => __('Categoria') . ' <i class="fa fa-angle-down"></i>',
+                        'desc' => __('Categoria') . ' <i class="fa fa-angle-up"></i>'
+                    ),
+                    array( 'escape' => false )
+                );?>   
+                </th>
+                <th scope="col">
+                <?=$this->Paginator->sort(
                     'created',
                     array('asc' => __('Criado em') . ' <i class="fa fa-angle-down"></i>',
                         'desc' => __('Criado em') . ' <i class="fa fa-angle-up"></i>'
                     ),
-                    array( 
-                        'escape' => false
-                    )
-                );
-                ?>   
+                    array( 'escape' => false )
+                );?>   
                 </th>
                 <th scope="col">
-                <?= 
-                $this->Paginator->sort(
+                <?=$this->Paginator->sort(
                     'modified',
                     array('asc' => __('Modificado em') . ' <i class="fa fa-angle-down"></i>',
                         'desc' => __('Modificado em') . ' <i class="fa fa-angle-up"></i>'
                     ),
-                    array( 
-                        'escape' => false
-                    )
-                );
-                ?>   
+                    array( 'escape' => false )
+                );?>   
                 </th>
                 <th scope="col" class="actions"><?= __('Ações') ?></th>
             </tr>
@@ -53,7 +77,7 @@
             <tr>              
                 <td><?= $upload->has('user') ? $this->Html->link($upload->user->name, ['controller' => 'Users', 'action' => 'view', $upload->user->id]) : '' ?></td>
                 <td><?= $this->Html->link($upload->filename,'/'.str_replace('\\', '/', $upload->file_dir) . '/' . $upload->file, ['target' => '_blank']); ?></td>
-                <td><?php
+                <td class="d-flex justify-content-center"><?php
                 if(!empty($upload->thumbnail)):
                     echo $this->Html->image('/'.str_replace('\\', '/', $upload->thumbnail_dir) . '/thumbnail-' . $upload->thumbnail);
                 else:

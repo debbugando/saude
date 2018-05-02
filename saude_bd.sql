@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela saude.categories: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela saude.categories: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 INSERT INTO `categories` (`id`, `name`, `created`, `modified`) VALUES
 	(1, 'Impressos', '2018-04-29 22:32:48', '2018-04-29 22:32:48'),
@@ -44,27 +44,10 @@ CREATE TABLE IF NOT EXISTS `logs` (
   PRIMARY KEY (`id`),
   KEY `FK_logs_uploads` (`upload_id`),
   KEY `FK_logs_users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela saude.logs: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `logs` DISABLE KEYS */;
-INSERT INTO `logs` (`id`, `user_id`, `upload_id`, `log`, `created`, `modified`) VALUES
-	(1, 7, 9, 'Inserção Dados Upload', '2018-05-02 01:26:04', '2018-05-02 01:26:04'),
-	(2, 7, 9, 'Edição Dados Upload', '2018-05-02 01:26:16', '2018-05-02 01:26:16'),
-	(3, 7, 4, 'Edição Dados Upload', '2018-05-02 01:26:38', '2018-05-02 01:26:38'),
-	(4, 7, 4, 'Edição Dados Upload', '2018-05-02 01:26:45', '2018-05-02 01:26:45'),
-	(5, 7, 10, 'Inserção Dados Upload', '2018-05-02 01:32:59', '2018-05-02 01:32:59'),
-	(6, 7, 10, 'Exclusão de Dados Upload', '2018-05-02 01:33:10', '2018-05-02 01:33:10'),
-	(7, 7, 2, 'Exclusão de Dados Upload', '2018-05-02 01:39:04', '2018-05-02 01:39:04'),
-	(8, 7, 11, 'Inserção Dados Upload', '2018-05-02 01:39:33', '2018-05-02 01:39:33'),
-	(9, 7, 12, 'Inserção Dados Upload', '2018-05-02 01:40:10', '2018-05-02 01:40:10'),
-	(10, 7, 12, 'Edição Dados Upload', '2018-05-02 01:40:38', '2018-05-02 01:40:38'),
-	(11, 7, 12, 'Exclusão de Dados Upload', '2018-05-02 01:40:58', '2018-05-02 01:40:58'),
-	(12, 7, 13, 'Inserção Dados Upload', '2018-05-02 02:13:13', '2018-05-02 02:13:13'),
-	(13, 7, 14, 'Inserção Dados Upload', '2018-05-02 02:13:28', '2018-05-02 02:13:28'),
-	(14, 7, 14, 'Exclusão de Dados Upload', '2018-05-02 02:30:07', '2018-05-02 02:30:07'),
-	(15, 7, 13, 'Exclusão de Dados Upload', '2018-05-02 02:30:12', '2018-05-02 02:30:12'),
-	(16, 7, 11, 'Exclusão de Dados Upload', '2018-05-02 02:30:17', '2018-05-02 02:30:17');
 /*!40000 ALTER TABLE `logs` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela saude.roles
@@ -105,9 +88,9 @@ CREATE TABLE IF NOT EXISTS `uploads` (
   KEY `category_key` (`category_id`),
   CONSTRAINT `category_key` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
   CONSTRAINT `user_key` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela saude.uploads: ~5 rows (aproximadamente)
+-- Copiando dados para a tabela saude.uploads: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `uploads` DISABLE KEYS */;
 /*!40000 ALTER TABLE `uploads` ENABLE KEYS */;
 
@@ -124,13 +107,13 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   KEY `perfil` (`role`),
   CONSTRAINT `role_key` FOREIGN KEY (`role`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela saude.users: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela saude.users: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `cbo`, `role`, `password`, `email`, `created`, `modified`) VALUES
-	(7, 'admin', '23332323', 1, '$2y$10$W4qbM3A6lRlo/APhp6ZDie.1AjqlT81XC8/13x2084EgEFWmaYUWe', 'admin@email.com', '2018-04-29 18:33:16', '2018-05-02 03:12:23'),
-	(8, 'operador 1', '', 2, '$2y$10$YDmffLhan2doAQSPB53daulWF12BwE86BHZApkUNVGVcthDbb490m', 'operador1@email.com', '2018-04-29 21:42:56', '2018-04-29 21:43:30');
+	(1, 'Médico Clínico', '225125', 1, '$2y$10$ZtgARYE5QXSr/m7EaAQyoenQtTUdr972rYuZF9VszsK1Zy7Rdw/ra', 'medico@email.com', '2018-04-29 18:33:16', '2018-05-02 16:33:56'),
+	(2, 'Enfermeiro', '223505', 2, '$2y$10$J5UaRIe0LRbQgm3ti9WV8ezsPnQMVP1eMmicezcfVjiabaQuFDjAi', 'enfermeiro@email.com', '2018-04-29 21:42:56', '2018-05-02 16:34:14');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

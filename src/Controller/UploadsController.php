@@ -21,7 +21,8 @@ class UploadsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users','Categories']
+            'contain' => ['Users','Categories'],
+            'limit'   => 10
         ];
 
         $uploads = $this->paginate($this->Uploads);    
@@ -39,8 +40,8 @@ class UploadsController extends AppController
     public function view($id = null)
     {
         $upload = $this->Uploads->get($id, [
-            'contain' => ['Users']
-        ]);        
+            'contain' => ['Users','Categories']
+        ]);      
 
         $this->set('upload', $upload);
     }
@@ -67,23 +68,34 @@ class UploadsController extends AppController
 
             //Validação de thumbnail para configurar a extensão que será salva
             if(!empty($this->request->getData('thumbnail')['name']) && in_array($this->request->getData('thumbnail')['type'],$allowedImg)){
-                $caminho = pathinfo($this->request->getData('thumbnail')['name']);
-                $upload->thumbnail['type'] = $caminho['extension'];
+                $caminho = pathinfo($this->request->getData('thumbnail')['name'], PATHINFO_EXTENSION);
+                $upload->thumbnail['type'] = $caminho;
             }
 
             //Arquivos Permitidos para Arquivos
             $allowedFile = array(
                 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',//DOCX
-                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',//XLSX
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',//XLSX,
+                'application/vnd.ms-powerpoint',//PPT
+                'application/vnd.openxmlformats-officedocument.presentationml.presentation', //PPTX
                 'application/msword',//WORD
-                'application/excel', //XLS
+                'application/excel', //XLSX
+                'application/vnd.ms-excel', //XLS
                 'application/pdf', //PDF
             );
-            
+            //debug($this->request->getData('file')['type']);exit;
             //Validação de thumbnail para configurar a extensão que será salva
             if(!empty($this->request->getData('file')['name']) && in_array($this->request->getData('file')['type'],$allowedFile)){
-                $caminho = pathinfo($this->request->getData('file')['name']);
-                $upload->file['type'] = $caminho['extension'];
+                $caminho = pathinfo($this->request->getData('file')['name'], PATHINFO_EXTENSION);
+
+                if($this->request->getData('file')['type']=='application/vnd.ms-excel'){
+                    $caminho = 'xls';
+                }elseif($this->request->getData('file')['type']=='application/vnd.ms-powerpoint' || 
+                    $this->request->getData('file')['type']=='application/vnd.openxmlformats-officedocument.presentationml.presentation'
+                ){
+                    $caminho = 'ppt';
+                }
+                $upload->file['type'] = $caminho;
             }
                        
             if ($this->Uploads->save($upload)) {
@@ -133,23 +145,34 @@ class UploadsController extends AppController
 
             //Validação de thumbnail para configurar a extensão que será salva
             if(!empty($this->request->getData('thumbnail')['name']) && in_array($this->request->getData('thumbnail')['type'],$allowedImg)){
-                $caminho = pathinfo($this->request->getData('thumbnail')['name']);
-                $upload->thumbnail['type'] = $caminho['extension'];
+                $caminho = pathinfo($this->request->getData('thumbnail')['name'], PATHINFO_EXTENSION);            
+                $upload->thumbnail['type'] = $caminho;
             }
 
             //Arquivos Permitidos para Arquivos
             $allowedFile = array(
                 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',//DOCX
-                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',//XLSX
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',//XLSX,
+                'application/vnd.ms-powerpoint',//PPT
+                'application/vnd.openxmlformats-officedocument.presentationml.presentation', //PPTX
                 'application/msword',//WORD
-                'application/excel', //XLS
+                'application/excel', //XLSX
+                'application/vnd.ms-excel', //XLS
                 'application/pdf', //PDF
             );
             
             //Validação de thumbnail para configurar a extensão que será salva
             if(!empty($this->request->getData('file')['name']) && in_array($this->request->getData('file')['type'],$allowedFile)){
-                $caminho = pathinfo($this->request->getData('file')['name']);
-                $upload->file['type'] = $caminho['extension'];
+                $caminho = pathinfo($this->request->getData('file')['name'], PATHINFO_EXTENSION);
+
+                if($this->request->getData('file')['type']=='application/vnd.ms-excel'){
+                    $caminho = 'xls';
+                }elseif($this->request->getData('file')['type']=='application/vnd.ms-powerpoint' || 
+                    $this->request->getData('file')['type']=='application/vnd.openxmlformats-officedocument.presentationml.presentation'
+                ){
+                    $caminho = 'ppt';                
+                }
+                $upload->file['type'] = $caminho;
             }
 
             if ($this->Uploads->save($upload)) {                

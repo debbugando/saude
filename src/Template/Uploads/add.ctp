@@ -13,7 +13,7 @@
         <?php echo $this->Form->control('file', ['label' =>'Arquivo', 'class' => 'form-control', 'type' => 'file']); ?>
     </div>
     <div class="form-group">
-        <?php echo $this->Form->control('thumbnail', ['label' =>'Arquivo', 'class' => 'form-control', 'type' => 'file']); ?>
+        <?php echo $this->Form->control('thumbnail', ['label' =>'Miniatura', 'class' => 'form-control', 'type' => 'file']); ?>
     </div>
     <div class="form-group">
         <?php echo $this->Form->control('category_id', ['label' =>'Categoria', 'class' => 'form-control']); ?>

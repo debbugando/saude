@@ -6,9 +6,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">    
     <?php echo $this->Html->link( $descricaoApp, ['controller' =>'Uploads', 'action' => 'index'], ['class' => 'navbar-brand']); ?>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
+    <div class="collapse navbar-collapse" id="navbarResponsive">      
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">            
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Uploads">
               <a class="nav-link" href="<?php echo $this->Url->build(["controller" => "Uploads", "action" => "index"]); ?>">
@@ -49,22 +49,36 @@
             <li class="nav-item">
                 <a class="nav-link text-center" id="sidenavToggler">
                 <i class="fa fa-fw fa-angle-left"></i>
-                </a>
+                </a>            
+        </ul>        
+        <ul class="navbar-nav mr-auto">            
+            <li class="nav-item">
+            <?php
+            if(!$authUser==null):
+              echo $this->Html->link(
+                'Bemvindo, ' . ucwords($authUser['name'] . ' - CBO: ' . $authUser['cbo'] . ' - Perfil: '. $authUser['role_name']),
+                ['controller' => 'Users', 'action' => 'view', $authUser['id']],
+                ['class' =>'nav-link'],
+                ['escape' => false]
+              );
+            endif;
+            ?>
             </li>
         </ul>
-        <ul class="navbar-nav ml-auto">
-
+        <ul class="navbar-nav ml-auto">            
             <li class="nav-item">
             <?php 
             if(!$authUser):
-                echo $this->Html->link('Login', ['controller' => 'users', 'action' =>'login']);
+                echo $this->Html->link('Login',
+                  ['controller' => 'users', 'action' =>'login'],
+                  ['class' =>'nav-link']);
             else:
                 echo $this->Html->link(
-                    'Logout',
-                    ['controller' => 'Users', 'action' => 'logout'],
-                    ['confirm' => 'Deseja Sair?']
-                );
-                
+                'Logout',
+                ['controller' => 'Users', 'action' => 'logout'],
+                ['confirm' => 'Deseja Sair?','class' =>'nav-link'],
+                ['escape' => false]
+              );
             endif;
             ?>
             </li>

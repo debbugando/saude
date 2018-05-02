@@ -21,7 +21,8 @@ class LogsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users','Uploads']
+            'contain' => ['Users','Uploads'],
+            'limit'   => 10
         ];
 
         $logs = $this->paginate($this->Logs);    

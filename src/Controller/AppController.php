@@ -29,13 +29,14 @@ class AppController extends Controller
 {
     public function beforeFilter(Event $event)
     {        
-        $this->Auth->allow(['index','view']);
+        $this->Auth->allow(['index','view']);        
         $this->set('authUser', $this->Auth->user());
-        $this->set('descricaoApp','Saúde');
+        $this->set('descricaoApp','Saúde');                    
         
-        if($this->Auth->user()){
+        if(!$this->Auth->user()==null){            
             $this->Auth->allow(['add']);        
         }
+
         if($this->Auth->user('role')==1){
             $this->Auth->allow(['edit','upload','delete']); 
         }        

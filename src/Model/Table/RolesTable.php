@@ -55,7 +55,13 @@ class RolesTable extends Table
         $validator
             ->scalar('role_name')
             ->maxLength('role_name', 50)
-            ->requirePresence('role_name', 'create')
+             ->add('role_name', [
+                'length' => [
+                    'rule' => ['minLength', 5],
+                    'message' => 'Nome deverá ter pelo menos 5 caracteres',
+                ]
+            ])
+            ->requirePresence('role_name', 'create')            
             ->notEmpty('role_name');
 
         return $validator;

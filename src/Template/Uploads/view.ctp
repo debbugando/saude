@@ -5,43 +5,50 @@
  */
 ?>
 <div class="uploads view large-9 medium-8 columns content">
-    <h3><?= h($upload->id) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('User') ?></th>
-            <td><?= $upload->has('user') ? $this->Html->link($upload->user->name, ['controller' => 'Users', 'action' => 'view', $upload->user->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Photo') ?></th>
-            <td><?= h($upload->photo) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Photo Dir') ?></th>
-            <td><?= h($upload->photo_dir) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Photo Type') ?></th>
-            <td><?= h($upload->photo_type) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($upload->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Category Id') ?></th>
-            <td><?= $this->Number->format($upload->category_id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Photo Size') ?></th>
-            <td><?= $this->Number->format($upload->photo_size) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Created') ?></th>
-            <td><?= h($upload->created) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Modified') ?></th>
-            <td><?= h($upload->modified) ?></td>
-        </tr>
-    </table>
+    <h3><?= h('Exibição de upload: '.$upload->id) ?></h3>
+    <form>
+      <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label"><?= __('Usuário:') ?></label>
+        <div class="col-sm-10">
+          <?= $upload->has('user') ? $this->Html->link($upload->user->name, ['controller' => 'Users', 'action' => 'view', $upload->user->id]) : '' ?>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="photo" class="col-sm-2 col-form-label"><?= __('Arquivo:') ?></label>
+        <div class="col-sm-10">
+          <?= $this->Html->link($upload->filename,'/'.str_replace('\\', '/', $upload->file_dir) . '/' . $upload->file, ['target' => '_blank']); ?>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="photo" class="col-sm-2 col-form-label"><?= __('Miniatura:') ?></label>
+        <div class="col-sm-10">
+          <?php
+            if(!empty($upload->thumbnail)):
+                echo $this->Html->image('/'.str_replace('\\', '/', $upload->thumbnail_dir) . '/thumbnail-' . $upload->thumbnail);
+            else:
+                echo $this->Html->image($upload->file_type.'.png');
+            endif;
+
+            ?>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="category_id" class="col-sm-2 col-form-label"><?= __('Categoria:') ?></label>
+        <div class="col-sm-10">          
+          <input class="form-control" id="created" value="<?= h($upload->category->name); ?>">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="created" class="col-sm-2 col-form-label"><?= __('Criado em:') ?></label>
+        <div class="col-sm-10">
+          <input class="form-control" id="created" value="<?= h($upload->created) ?>">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="modified" class="col-sm-2 col-form-label"><?= __('Modificado em:') ?></label>
+        <div class="col-sm-10">
+          <input class="form-control" id="modified" value="<?= h($upload->modified) ?>">
+        </div>
+      </div>      
+    </form>
 </div>

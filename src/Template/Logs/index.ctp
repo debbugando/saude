@@ -11,6 +11,7 @@
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
+                <th scope="col"><?= $this->Paginator->sort('user', 'Usuário') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('log', 'Log') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created', 'Criado em') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified', 'Modificado em') ?></th>
@@ -19,11 +20,13 @@
         </thead>
         <tbody>
             <?php foreach ($logs as $log): ?>
-            <tr>            
+            <tr>
+                <td><?= h(ucwords($log->user->name)) ?></td>            
                 <td><?= h($log->log) ?></td>
                 <td><?= h($log->created) ?></td>
                 <td><?= h($log->modified) ?></td>
                 <td class="actions">
+                    <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $log->id]) ?>
                     <?= $this->Form->postLink(__('Remover'), ['action' => 'delete', $log->id], ['confirm' => __('Deseja Remover o Registro # {0}?', $log->id)]) ?>
                 </td>
             </tr>

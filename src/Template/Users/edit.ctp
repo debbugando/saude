@@ -15,9 +15,11 @@
     <div class="form-group">        
         <?php echo $this->Form->control('role', ['label' =>'Perfil', 'class' => 'form-control']); ?>
     </div>
+    <?php if($authUser['role']==1 || $authUser['id']==$user->id): ?>
     <div class="form-group">        
-        <?php echo $this->Form->control('password', ['label' =>'Senha', 'type' => 'password', 'class' => 'form-control']); ?>
+        <?php echo $this->Form->control('password', ['label' =>'Redefinir Senha', 'type' => 'password', 'class' => 'form-control']); ?>
     </div>
+    <?php endif; ?>
     <div class="form-group">        
         <?php echo $this->Form->control('email', ['label' =>'E-mail', 'class' => 'form-control']); ?>
     </div>    

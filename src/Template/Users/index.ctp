@@ -6,7 +6,7 @@
 ?>
 <div class="table-responsive">
     <div style="margin-bottom:1%;">
-        <h3>Listagem Arquivos
+        <h3>Listagem Usuários
             <?php if($authUser['role']==1): ?>
                 <?php echo $this->Html->link('Adicionar Usuário', ['controller' => 'Users', 'action' => 'add'], ['class' =>'float-right btn btn-primary']); ?>
             <?php endif; ?>
@@ -14,13 +14,61 @@
     </div>
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
-            <tr>                
-                <th scope="col"><?= $this->Paginator->sort('name', 'Nome') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('cbo', 'CBO') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('role', 'Perfil') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('email', 'E-mail') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created', 'Criado em') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified', 'Modificado em') ?></th>
+            <tr>                                
+                <th scope="col">
+                <?=$this->Paginator->sort(
+                    'name',
+                    array('asc' => __('Nome') . ' <i class="fa fa-angle-down"></i>',
+                        'desc' => __('Nome') . ' <i class="fa fa-angle-up"></i>'
+                    ),
+                    array( 'escape' => false )
+                );?>   
+                </th>
+                <th scope="col">
+                <?=$this->Paginator->sort(
+                    'cbo',
+                    array('asc' => __('CBO') . ' <i class="fa fa-angle-down"></i>',
+                        'desc' => __('CBO') . ' <i class="fa fa-angle-up"></i>'
+                    ),
+                    array( 'escape' => false )
+                );?>   
+                </th>
+                <th scope="col">
+                <?=$this->Paginator->sort(
+                    'role',
+                    array('asc' => __('Perfil') . ' <i class="fa fa-angle-down"></i>',
+                        'desc' => __('Perfil') . ' <i class="fa fa-angle-up"></i>'
+                    ),
+                    array( 'escape' => false )
+                );?>   
+                </th>
+                <th scope="col">
+                <?=$this->Paginator->sort(
+                    'email',
+                    array('asc' => __('E-mail') . ' <i class="fa fa-angle-down"></i>',
+                        'desc' => __('E-mail') . ' <i class="fa fa-angle-up"></i>'
+                    ),
+                    array( 'escape' => false )
+                );?>   
+                </th>
+                <th scope="col">
+                <?=$this->Paginator->sort(
+                    'created',
+                    array('asc' => __('Criado em') . ' <i class="fa fa-angle-down"></i>',
+                        'desc' => __('Criado em') . ' <i class="fa fa-angle-up"></i>'
+                    ),
+                    array( 'escape' => false )
+                );?>   
+                </th>
+                <th scope="col">
+                <?=$this->Paginator->sort(
+                    'modified',
+                    array('asc' => __('Modificado em') . ' <i class="fa fa-angle-down"></i>',
+                        'desc' => __('Modificado em') . ' <i class="fa fa-angle-up"></i>'
+                    ),
+                    array( 'escape' => false )
+                );?>   
+                </th>
                 <th scope="col" class="actions"><?= __('Ações') ?></th>
             </tr>
         </thead>
